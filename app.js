@@ -5,22 +5,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector("form");
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const userName = document.querySelector('input').value
+        const userName = document.querySelector('input').value;
 
         if(users.includes(userName)){
             alert('The user is already on the list, please search for a new user instead');
             return;
         }
-        users.push(userName)
+        users.push(userName);
 
         const response = await fetch(`https://api.github.com/users/${userName}`)
 
         if(response.status === 200){
             const data = await response.json();
             const card = createCard(data);
-            document.querySelector('#container').insertAdjacentHTML("afterbegin", card)
+            document.querySelector('#container').insertAdjacentHTML("afterbegin", card);
+            document.querySelector('input').value = '';
         } else 
-        alert('Username not found')
+        alert('Username not found');
             
         
     })
