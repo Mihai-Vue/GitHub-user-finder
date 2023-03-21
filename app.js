@@ -11,14 +11,16 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('The user is already on the list, please search for a new user instead');
             return;
         }
-            users.push(userName)
+        users.push(userName)
 
-            const response = await fetch(`https://api.github.com/users/${userName}`)
+        const response = await fetch(`https://api.github.com/users/${userName}`)
 
-            if(response.status === 200){
-                const data = await response.json()
-                
-            }
+        if(response.status === 200){
+            const data = await response.json();
+            const card = createCard(data);
+            document.querySelector('#container').insertAdjacentHTML("afterbegin", card)
+        } else 
+        alert('Username not found')
             
         
     })
